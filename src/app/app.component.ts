@@ -1,35 +1,28 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+
+import {AccountService} from './account.service';
 
 export class Account {
   name: string;
   id: number;
 }
 
-const accs: Account[] = [{
-	name: '1st acc',
-	id: 1
-},{
-	name: '2st acc',
-	id: 2
-},{
-	name: '3st acc',
-	id: 3
-},{
-	name: '4st acc',
-	id: 4
-},{
-	name: '5st acc',
-	id: 5
-}];
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
+  providers: [AccountService]
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
+
+  constructor(private accountService: AccountService){}
 
   selectedAcc: Account;
+
+  ngOnInit(): void {
+    this.getAccounts();
+  }
 
   onSelect(account: Account): void {
   	if (this.selectedAcc === account) {
@@ -39,7 +32,11 @@ export class AppComponent {
   	}
   }
 
-  accounts = accs;
+  getAccounts(): void {
+    this.accounts = this.accountService.getAccounts();
+  }
+
+  accounts : Account[];
   title = 'AccShop';
   acc = 'anus';
 }

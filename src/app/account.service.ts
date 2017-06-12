@@ -5,7 +5,11 @@ import {ACCOUNTS} from './mock-accounts';
 
 @Injectable()
 export class AccountService{
-	getAccounts(): Account[] {
-		return ACCOUNTS;
+	getAccounts(): Promise<Account[]> {
+		return new Promise((resolve, reject) => {
+			setTimeout(()=> {
+				resolve(ACCOUNTS);
+			}, 1000)
+		})
 	};
 }

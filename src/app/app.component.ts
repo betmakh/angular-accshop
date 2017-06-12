@@ -1,42 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 
-import {AccountService} from './account.service';
-
-export class Account {
-  name: string;
-  id: number;
-}
-
-
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css'],
-  providers: [AccountService]
+	selector: 'accshop-app',
+	template: `    <h1>
+	    Root component title: {{title}}!!
+	  </h1>
+	  <a routerLink="/accounts">Accounts</a>
+	  <router-outlet></router-outlet>`
 })
-export class AppComponent implements OnInit {
-
-  constructor(private accountService: AccountService){}
-
-  selectedAcc: Account;
-
-  ngOnInit(): void {
-    this.getAccounts();
-  }
-
-  onSelect(account: Account): void {
-  	if (this.selectedAcc === account) {
-  		this.selectedAcc = null;	
-  	} else {
-  		this.selectedAcc = account;
-  	}
-  }
-
-  getAccounts(): void {
-    this.accounts = this.accountService.getAccounts();
-  }
-
-  accounts : Account[];
+export class AppComponent {
   title = 'AccShop';
-  acc = 'anus';
 }

@@ -9,8 +9,8 @@
     <input [(ngModel)]="selectedAcc.name" placeholder="name">
 </article> -->
 <ul class="accs">
-    <li *ngFor="let acc of accounts" [class.selected]="acc === selectedAcc" (click)="onSelect(acc)">
-        <span class="badge">{{acc.id}}</span> {{acc.name}}
+
+    <li *ngFor="let acc of accounts" [class.selected]="acc === selectedAcc">
+        <a [routerLink]="['/detail', acc.id]">{{acc.name}}</a>
     </li>
 </ul>
-<acc-detail [account]="selectedAcc"></acc-detail>

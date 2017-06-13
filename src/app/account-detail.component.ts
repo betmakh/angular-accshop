@@ -6,6 +6,9 @@ import 'rxjs/add/operator/switchMap';
 import {AccountService} from './account.service';
 import {Account} from './account';
 
+import AccountModel from '../db/models/accountModel';
+
+
 @Component({
     selector: 'acc-detail',
     template: `
@@ -16,6 +19,7 @@ import {Account} from './account';
 	        <label>name: </label>
 	        <input [(ngModel)]="account.name" placeholder="name"/>
 	      </div>
+	      <button (click)="goBack()">Back</button>
 	    </div>`
 })
 export class AccountDetailComponent implements OnInit {
@@ -23,8 +27,12 @@ export class AccountDetailComponent implements OnInit {
 
 	ngOnInit() :void {
 		this.route.params
-			.switchMap((params: Params) => this.accountService.getAccount(params.id))
+			.switchMap((params: Params) => this.accountService.getAccount(+params.id))
 			.subscribe(account => this.account = account);
+	}
+
+	goBack(): void {
+		this.location.back();
 	}
 
 	constructor(

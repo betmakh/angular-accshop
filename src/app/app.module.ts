@@ -8,6 +8,9 @@ import { AccountDetailComponent } from './account-detail.component';
 import { AccountService } from './account.service';
 import { AccountsComponent } from './accounts.component';
 
+
+import mongoose from '../db/connection';
+
 @NgModule({
     declarations: [
         AppComponent,
@@ -20,6 +23,9 @@ import { AccountsComponent } from './accounts.component';
         RouterModule.forRoot([{
             path: 'accounts',
             component: AccountsComponent
+        },{
+        	path: 'detail/:id',
+        	component: AccountDetailComponent
         }])
     ],
     providers: [AccountService],
